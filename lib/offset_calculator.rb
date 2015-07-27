@@ -17,6 +17,10 @@ class OffsetCalculator
     @offset = OffsetGenerator.new.generate_offset
   end
 
+  def decryptor_offset
+    @offset = OffsetGenerator.new.given_offset(date)
+  end
+
   def rot_a
     key[0..1]
   end
