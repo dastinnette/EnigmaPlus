@@ -1,4 +1,5 @@
 require_relative "offset_calculator"
+require_relative "encrypt"
 
 class Encryptor
 
@@ -72,17 +73,22 @@ class Encryptor
     cipher_for_rotation[letter]
   end
 
-  def encrypt(string)
-    array = string.downcase.split("")
+  def encrypt(input)
+    file_io = FileIO.new
+    input = file_io.read_input
+    array = input.downcase.split("")
     fours = array.each_slice(4).to_a
     results = ""
     fours.each do |four|
+      if !four.include?("\n")
       results << encrypt_letter_a(four[0])
       results << encrypt_letter_b(four[1])
       results << encrypt_letter_c(four[2])
       results << encrypt_letter_d(four[3])
     end
-    results
+    end
+
+    file_io.write_output(results)
   end
 
 end
