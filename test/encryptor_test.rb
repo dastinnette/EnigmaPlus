@@ -10,6 +10,26 @@ class EncryptorTest < Minitest::Test
     assert_equal 39, character_map.count
   end
 
+  def test_a_cipher_rotates_properly_according_to_rotation
+    rotation = Encryptor.new
+    assert_equal ["b"], rotation.a_cipher(1).values_at("a")
+  end
+
+  def test_b_cipher_rotates_properly_according_to_rotation
+    rotation = Encryptor.new
+    assert_equal ["c"], rotation.b_cipher(2).values_at("a")
+  end
+
+  def test_c_cipher_rotates_properly_according_to_rotation
+    rotation = Encryptor.new
+    assert_equal ["d"], rotation.c_cipher(3).values_at("a")
+  end
+
+  def test_d_cipher_rotates_properly_according_to_rotation
+    rotation = Encryptor.new
+    assert_equal ["e"], rotation.d_cipher(4).values_at("a")
+  end
+
   def test_input_encrypts_a_properly_based_on_rotation
     shift = Encryptor.new
     assert_equal "b", shift.encrypt_letter_a("a", 1)

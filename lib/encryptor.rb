@@ -2,8 +2,16 @@ require_relative "offset_calculator"
 
 class Encryptor
 
-  def get_rotation
-    @a_rotation = OffsetCalculator.new.a_rotation
+  attr_reader :a_rotation, :b_rotation, :c_rotation, :d_rotation
+
+  def get_rotations
+    calc = OffsetCalculator.new
+    calc.get_key
+    calc.get_offset
+    @a_rotation = calc.a_rotation
+    @b_rotation = calc.b_rotation
+    @c_rotation = calc.c_rotation
+    @d_rotation = calc.d_rotation
   end
 
   def encrypt_me
@@ -76,5 +84,6 @@ end
 
 if __FILE__ == $0
 e = Encryptor.new
-e.encrypt("1234", 1, 1, 1, 1)
+e.get_rotations
+e.encrypt("1234", a_rotation, b_rotation, c_rotation, d_rotation)
 end
