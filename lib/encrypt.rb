@@ -3,8 +3,6 @@ require 'pry'
 class Encrypt
 
 
-
-
 end
 
 class Key
@@ -25,24 +23,25 @@ class Key
   end
 
   def rot_a
-    @key[0..1]
+    key[0..1]
   end
 
   def rot_b
-    @key[1..2]
+    key[1..2]
   end
 
   def rot_c
-    @key[2..3]
+    key[2..3]
   end
 
   def rot_d
-    @key[3..4]
+    key[3..4]
   end
-
 end
 
 class Offset
+
+  attr_reader :offset
 
   def initialize(offset = nil)
     @offset = offset || find_offset
@@ -51,23 +50,23 @@ class Offset
   def find_offset
     date = Time.now.strftime("%d%m%y")
     squared = date.to_i**2
-    squared.to_s[-4..-1]
+    @offset = squared.to_s[-4..-1]
   end
 
   def off_a
-    @offset[-4]
+    offset[-4]
   end
 
   def off_b
-    @offset[-3]
+    offset[-3]
   end
 
   def off_c
-    @offset[-2]
+    offset[-2]
   end
 
   def off_d
-    @offset[-1]
+    offset[-1]
   end
 end
 
