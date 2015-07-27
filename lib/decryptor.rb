@@ -1,9 +1,7 @@
-require_relative "offset_calculator"
+require_relative 'offset_calculator'
+require_relative 'encryptor'
 
-class Encryptor
-
-  # if encrypt = true, add rotations.
-  # if encrypt = false, subtract rotations
+class Decryptor
 
   attr_reader :a_rotation, :b_rotation, :c_rotation, :d_rotation
 
@@ -15,13 +13,12 @@ class Encryptor
   end
 
   def get_rotations
-    calc = OffsetCalculator.new
-    calc.get_key
+    calc = OffsetCalculator.new(key, offset)
     calc.get_offset
-    @a_rotation = calc.a_rotation
-    @b_rotation = calc.b_rotation
-    @c_rotation = calc.c_rotation
-    @d_rotation = calc.d_rotation
+    @a_rotation = calc.a_rotation.-@
+    @b_rotation = calc.b_rotation.-@
+    @c_rotation = calc.c_rotation.-@
+    @d_rotation = calc.d_rotation.-@
   end
 
   def characters
@@ -52,43 +49,48 @@ class Encryptor
     Hash[characters.zip(d_rotated_characters)]
   end
 
-  def encrypt_letter_a(letter)
+  def decrypt_letter_a(letter)
     cipher_for_rotation = a_cipher
     cipher_for_rotation[letter]
   end
 
-  def encrypt_letter_b(letter)
+  def decrypt_letter_b(letter)
     cipher_for_rotation = b_cipher
     cipher_for_rotation[letter]
   end
 
-  def encrypt_letter_c(letter)
+  def decrypt_letter_c(letter)
     cipher_for_rotation = c_cipher
     cipher_for_rotation[letter]
   end
 
-  def encrypt_letter_d(letter)
+  def decrypt_letter_d(letter)
     cipher_for_rotation = d_cipher
     cipher_for_rotation[letter]
   end
 
-  def encrypt(string)
+  def decrypt(string)
     array = string.downcase.split("")
     fours = array.each_slice(4).to_a
     results = ""
     fours.each do |four|
-      results << encrypt_letter_a(four[0])
-      results << encrypt_letter_b(four[1])
-      results << encrypt_letter_c(four[2])
-      results << encrypt_letter_d(four[3])
+      results << decrypt_letter_a(four[0])
+      results << decrypt_letter_b(four[1])
+      results << decrypt_letter_c(four[2])
+      results << decrypt_letter_d(four[3])
     end
     results
   end
 
+
 end
 
 if __FILE__ == $0
-e = Encryptor.new
-e.get_rotations
-e.encrypt("This is my file to encrypt. It is a secret message that you will never be able to read. That is too bad.")
+  # e = Encryptor.new
+  # e.get_rotations
+  # encrypted = e.encrypt("This is my file to encrypt. It is a secret message that you will never be able to read. That is too bad.")
+
+d = Decryptor.new
+d.get_rotations
+d.decrypt("k3sh142zdhh7,7ozk h6ey1ngciz,ch jtkzj0mg8chb8b22 0hi.w3zp 4zn4va19ok8ah38tk3c0hift164zizk3ki142zk yz5wn0")
 end
