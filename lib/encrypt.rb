@@ -1,36 +1,41 @@
-require 'pry'                         # => true
-require_relative 'offset_calculator'  # => true
+require 'pry'
+require_relative 'encryptor'
 
 class Encrypt
 
+  def encrypt_file(filename, rotation)
+      # Create the file handle to the input file
+      filename = File.open("message.txt", "r")
+      # Read the text of the input file
+      file_read = filename.read
+      # Encrypt the text
+      encrypted = encrypt(file_read, rotation)
+      # Create a name for the output file
+      encrypted_file = "secret.txt.encrypted"
+      # Create an output file handle
+      output = File.open("secret.txt.encrypted", "w")
+      # Write out the text
+      output.write(encrypted)
+      # Close the file
+      output.close
+    end
 
-end  # => nil
+end
 
 
 
-if __FILE__ == $0           # => true
-key = OffsetCalculator.new  # => #<OffsetCalculator:0x007f90da8a50a8 @key=nil, @offset=nil>
-p key.get_key               # => "64573"
-p key.rot_a                 # => "64"
-p key.rot_b                 # => "45"
-p key.rot_c                 # => "57"
-p key.rot_d                 # => "73"
+if __FILE__ == $0
+key = OffsetCalculator.new
+p key.get_key
+p key.rot_a
+p key.rot_b
+p key.rot_c
+p key.rot_d
 
-offset = OffsetCalculator.new  # => #<OffsetCalculator:0x007f90da8a41d0 @key=nil, @offset=nil>
-p offset.get_offset            # => "1225"
-p offset.off_a                 # => "1"
-p offset.off_b                 # => "2"
-p offset.off_c                 # => "2"
-p offset.off_d                 # => "5"
-end                            # => "5"
-
-# >> "64573"
-# >> "64"
-# >> "45"
-# >> "57"
-# >> "73"
-# >> "1225"
-# >> "1"
-# >> "2"
-# >> "2"
-# >> "5"
+offset = OffsetCalculator.new
+p offset.get_offset
+p offset.off_a
+p offset.off_b
+p offset.off_c
+p offset.off_d
+end
