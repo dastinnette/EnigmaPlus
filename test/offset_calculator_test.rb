@@ -63,5 +63,5 @@ class OffsetCalculatorTest < Minitest::Test
     rotation = OffsetCalculator.new("12345", "1225")
     assert_equal rotation.rot_d.to_i + rotation.off_d.to_i, rotation.d_rotation
   end
-  
+
 end

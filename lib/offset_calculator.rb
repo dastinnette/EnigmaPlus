@@ -1,4 +1,4 @@
-require_relative "encrypt"
+require_relative "offset_generator"
 
 class OffsetCalculator
 
@@ -10,11 +10,11 @@ class OffsetCalculator
   end
 
   def get_key
-    @key = Key.new.generate_key
+    @key = OffsetGenerator.new.generate_key
   end
 
   def get_offset
-    @offset = Offset.new.find_offset
+    @offset = OffsetGenerator.new.generate_offset
   end
 
   def rot_a
@@ -71,7 +71,7 @@ end
 if __FILE__ == $0
   calc = OffsetCalculator.new
   calc.get_key
-  calc.date_offset
+  calc.get_offset
   p calc.rot_a
   p calc.rot_b
   p calc.rot_c
