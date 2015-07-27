@@ -11,60 +11,66 @@ class EncryptorTest < Minitest::Test
   end
 
   def test_a_cipher_rotates_properly_according_to_rotation
-    rotation = Encryptor.new
-    assert_equal ["b"], rotation.a_cipher(1).values_at("a")
+    rotation = Encryptor.new(1, 0, 0, 0)
+    assert_equal ["b"], rotation.a_cipher.values_at("a")
   end
 
   def test_b_cipher_rotates_properly_according_to_rotation
-    rotation = Encryptor.new
-    assert_equal ["c"], rotation.b_cipher(2).values_at("a")
+    rotation = Encryptor.new(2, 2, 45, 39)
+    assert_equal ["c"], rotation.b_cipher.values_at("a")
   end
 
   def test_c_cipher_rotates_properly_according_to_rotation
-    rotation = Encryptor.new
-    assert_equal ["d"], rotation.c_cipher(3).values_at("a")
+    rotation = Encryptor.new(1, 33, 3, 54)
+    assert_equal ["d"], rotation.c_cipher.values_at("a")
   end
 
   def test_d_cipher_rotates_properly_according_to_rotation
-    rotation = Encryptor.new
-    assert_equal ["e"], rotation.d_cipher(4).values_at("a")
+    rotation = Encryptor.new(1, 4, 66, 4)
+    assert_equal ["e"], rotation.d_cipher.values_at("a")
   end
 
   def test_input_encrypts_a_properly_based_on_rotation
-    shift = Encryptor.new
-    assert_equal "b", shift.encrypt_letter_a("a", 1)
+    shift = Encryptor.new(1, 0, 0, 0)
+    assert_equal "b", shift.encrypt_letter_a("a")
   end
 
   def test_input_encrypts_b_properly_based_on_rotation
-    shift = Encryptor.new
-    assert_equal "c", shift.encrypt_letter_b("a", 2)
+    shift = Encryptor.new(2, 2, 45, 39)
+    assert_equal "c", shift.encrypt_letter_b("a")
   end
 
   def test_input_encrypts_c_properly_based_on_rotation
-    shift = Encryptor.new
-    assert_equal "d", shift.encrypt_letter_a("a", 3)
+    shift = Encryptor.new(1, 33, 3, 54)
+    assert_equal "d", shift.encrypt_letter_c("a")
   end
 
   def test_input_encrypts_d_properly_based_on_rotation
-    shift = Encryptor.new
-    assert_equal "e", shift.encrypt_letter_a("a", 4)
+    shift = Encryptor.new(1, 4, 66, 4)
+    assert_equal "e", shift.encrypt_letter_d("a")
   end
 
   def test_word_encrypts_properly_based_on_simple_4_part_cipher
     input = "1234"
-    encryptor = Encryptor.new
-    assert_equal "2345", encryptor.encrypt(input, 1, 1, 1, 1)
+    encryptor = Encryptor.new(1, 1, 1, 1)
+    assert_equal "2345", encryptor.encrypt(input)
   end
 
   def test_word_encrypts_properly_based_on_4_different_4_part_cipher
     input = "1111"
-    encryptor = Encryptor.new
-    assert_equal "2345", encryptor.encrypt(input, 1, 2, 3, 4)
+    encryptor = Encryptor.new(1, 2, 3, 4)
+    assert_equal "2345", encryptor.encrypt(input)
   end
 
   def test_word_encrypts_properly_based_on_complex_4_part_cipher
     input = "1111"
-    encryptor = Encryptor.new
-    assert_equal "p7j3", encryptor.encrypt(input, 27, 45, 99, 2)
+    encryptor = Encryptor.new(27, 45, 99, 2)
+    assert_equal "p7j3", encryptor.encrypt(input)
+  end
+
+  def test_input_string_length_equals_output_string_length
+    encryptor = Encryptor.new(1, 1, 1, 1)
+    string = "1111"
+    assert string.length == encryptor.encrypt(string).length
   end
 end
