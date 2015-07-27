@@ -71,9 +71,7 @@ end
 if __FILE__ == $0
   calc = OffsetCalculator.new
   calc.get_key
-  p @key
   calc.date_offset
-  p @offset
   p calc.rot_a
   p calc.rot_b
   p calc.rot_c
