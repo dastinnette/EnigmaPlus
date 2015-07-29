@@ -10,7 +10,7 @@ class FileIO
 
   def read_input
     filename = File.open(input, "r")
-    filename.read
+    @input = filename.read
   end
 
   def write_output(results)

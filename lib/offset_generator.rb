@@ -1,13 +1,12 @@
 class OffsetGenerator
 
-  def generate_offset
-    date    = Time.now.strftime("%d%m%y")
-    squared = date.to_i**2
-    @offset = squared.to_s[-4..-1]
+  def initialize(key=nil, date=Time.now.strftime("%d%m%y"))
+    @key = key
+    @date = date
   end
 
-  def given_offset(date)
-    squared = date.to_i**2
+  def generate_offset
+    squared = @date.to_i**2
     @offset = squared.to_s[-4..-1]
   end
 
@@ -20,4 +19,13 @@ class OffsetGenerator
     @key = "#{num1}#{num2}#{num3}#{num4}#{num5}"
   end
 
+end
+
+if __FILE__ == $0
+encrypt = OffsetGenerator.new
+p encrypt.generate_offset
+p encrypt.generate_key
+decrypt = OffsetGenerator.new
+p decrypt.generate_offset
+p @key
 end

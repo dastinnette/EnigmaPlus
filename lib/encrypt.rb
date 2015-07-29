@@ -73,25 +73,25 @@ class Encrypt
     cipher_for_rotation[letter]
   end
 
-  def encrypt(input)
-  file_io = FileIO.new
-  downcase_input = file_io.read_input.downcase
+  # def input
+  #   file_io = FileIO.new
+  #   @input = file_io.read_input.downcase
+  # end
+
+  def encrypt
   i = 0
   encrypted_arr = []
-  while i <= downcase_input.length + 1
+  while i < input.length
     if i % 4 == 0 || i == 0
-      encrypted_arr << encrypt_letter_a(downcase_input[i])
-      i += 1
+      encrypted_arr << encrypt_letter_a(input[i])
     elsif i % 4 == 1 || i == 1
-      encrypted_arr << encrypt_letter_b(downcase_input[i])
-      i += 1
+      encrypted_arr << encrypt_letter_b(input[i])
     elsif i % 4 == 2 || i == 2
-      encrypted_arr << encrypt_letter_c(downcase_input[i])
-      i += 1
+      encrypted_arr << encrypt_letter_c(input[i])
     elsif i % 4 == 3 || i == 3
-      encrypted_arr << encrypt_letter_d(downcase_input[i])
-      i += 1
+      encrypted_arr << encrypt_letter_d(input[i])
     end
+    i += 1
     encrypted_input = encrypted_arr.join
   end
    file_io.write_output(encrypted_input)
@@ -101,6 +101,7 @@ end
 
 if __FILE__ == $0
 e = Encrypt.new
+input = FileIO.new.read_input
 e.get_rotations
-e.encrypt("This is my file to encrypt. It is a message that you will never be able to read. That is too bad.")
+e.encrypt
 end
