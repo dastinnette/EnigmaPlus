@@ -50,20 +50,19 @@ class EncryptTest < Minitest::Test
 
   def test_encrypts_file
     file_io = FileIO.new
-    message = file_io.message("message.txt")
+    message = file_io.message("encrypt_test.txt")
     encryptor = Encrypt.new("12345", "280715")
     encryptor.get_rotations
-    # ('12345','280715')
     assert_equal "bny,", encryptor.encrypt(message)
   end
 
   def test_prints_output_message_to_command_line
     file_io = FileIO.new
-    message = file_io.message("message.txt")
+    message = file_io.message("encrypt_test.txt")
     encryptor = Encrypt.new("12345", "280715")
     encryptor.get_rotations
-    file_io.output(encryptor.encrypt(message), "encrypted.txt")
+    file_io.output(encryptor.encrypt(message), "encrypt_test_results.txt")
     encryptor.print_message
-    assert_equal "Created 'encrypted.txt' with the key 12345 and date 280715.", encryptor.print_message
+    assert_equal "Created 'encrypt_test_results.txt' with the key 12345 and date 280715.", encryptor.print_message
   end
 end
