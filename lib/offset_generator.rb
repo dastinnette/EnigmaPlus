@@ -1,6 +1,7 @@
 class OffsetGenerator
 
   def generate_offset(date)
+    # date.to_s.delete ""
     squared = date.to_i**2
     @offset = squared.to_s[-4..-1]
   end

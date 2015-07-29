@@ -1,4 +1,5 @@
 require_relative "offset_generator"
+require 'pry'
 
 class OffsetCalculator
 
@@ -6,6 +7,7 @@ class OffsetCalculator
 
   def initialize(key = nil, date = nil)
     if key.nil?
+      binding.pry
       @key = get_key
     else
       @key = key
@@ -16,9 +18,7 @@ class OffsetCalculator
     else
       @date = date
     end
-
     @offset = get_offset
-
   end
 
   def get_key

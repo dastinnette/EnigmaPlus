@@ -26,20 +26,14 @@ class OffsetGeneratorTest < Minitest::Test
     # check for edge cases with punctuation and too many numbers given
   end
 
-  def test_given_offset_returns_four_digit_number
-    offset = OffsetGenerator.new
-    assert_equal "1225", offset.given_offset(280715)
-  end
-
-
   def test_offset_is_a_four_digit_number
     offset = OffsetGenerator.new
-    assert_equal 4, offset.generate_offset.length
+    assert_equal 4, offset.generate_offset(280715).length
   end
 
   def test_offset_is_always_the_same
-    offset1 = OffsetGenerator.new.generate_offset
-    offset2 = OffsetGenerator.new.generate_offset
+    offset1 = OffsetGenerator.new.generate_offset(280715)
+    offset2 = OffsetGenerator.new.generate_offset(280715)
     assert offset1 == offset2
   end
 
