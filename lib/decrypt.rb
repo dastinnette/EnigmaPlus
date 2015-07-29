@@ -1,7 +1,7 @@
 require_relative 'offset_calculator'
-require_relative 'encryptor'
+require_relative 'encrypt'
 
-class Decryptor
+class Decrypt
 
   attr_reader :a_rotation, :b_rotation, :c_rotation, :d_rotation
 
@@ -14,7 +14,7 @@ class Decryptor
 
   def get_rotations
     calc = OffsetCalculator.new(key, offset)
-    calc.get_offset
+    calc.given_offset(date)
     @a_rotation = calc.a_rotation.-@
     @b_rotation = calc.b_rotation.-@
     @c_rotation = calc.c_rotation.-@
