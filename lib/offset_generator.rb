@@ -1,12 +1,8 @@
 class OffsetGenerator
 
-  def initialize(key=nil, date=Time.now.strftime("%d%m%y"))
-    @key = key
-    @date = date
-  end
-
-  def generate_offset
-    squared = @date.to_i**2
+  def generate_offset(date)
+    # date.to_s.delete ""
+    squared = date.to_i**2
     @offset = squared.to_s[-4..-1]
   end
 

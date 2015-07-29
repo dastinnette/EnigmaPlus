@@ -1,24 +1,31 @@
 require_relative "offset_generator"
+require 'pry'
 
 class OffsetCalculator
 
-  attr_reader :key, :offset
+  attr_reader :key, :offset, :date
 
-  def initialize(key = nil, offset = nil)
-    @key    = key
-    @offset = offset
+  def initialize(key = nil, date = nil)
+    if key.nil?
+      @key = get_key
+    else
+      @key = key
+    end
+
+    if date.nil?
+      @date = Time.now.strftime("%d%m%y")
+    else
+      @date = date
+    end
+    @offset = get_offset
   end
 
   def get_key
-    @key = OffsetGenerator.new.generate_key
+    OffsetGenerator.new.generate_key
   end
 
   def get_offset
-    @offset = OffsetGenerator.new.generate_offset
-  end
-
-  def decryptor_offset
-    @offset = OffsetGenerator.new.given_offset(date)
+    OffsetGenerator.new.generate_offset(date)
   end
 
   def rot_a
@@ -68,6 +75,12 @@ class OffsetCalculator
   def d_rotation
     rot_d.to_i + off_d.to_i
   end
+
+  def rotations
+    [a_rotation, b_rotation, c_rotation, d_rotation]
+  end
+
+
 
 end
 
