@@ -6,14 +6,16 @@ class Encrypt
   # if encrypt = true, add rotations.
   # if encrypt = false, subtract rotations
 
-  attr_reader   :rotations, :file_io
+  attr_reader   :rotations, :file_io, :key, :date, :calc
 
-  def initialize
+  def initialize(key = nil, date = nil)
+    @date    = date
+    @key     = key
     @file_io = FileIO.new
+    @calc    = OffsetCalculator.new(key, date)
   end
 
   def get_rotations
-    calc = OffsetCalculator.new('12345','280715')
     @rotations = calc.rotations
   end
 
@@ -61,18 +63,18 @@ class Encrypt
     encrypted_input
   end
 
+  def print_message
+    "Created '#{ARGV[1]}' with the key #{key} and date #{date}."
+  end
 end
 
 if __FILE__ == $0
   # RUNNER
-  # puts encryptor.print_message
+
   file_io = FileIO.new
     message = file_io.message
-    encryptor = Encrypt.new
+    encryptor = Encrypt.new('12345', 280715)
     encryptor.get_rotations
     file_io.output(encryptor.encrypt(message))
+    puts encryptor.print_message
 end
-#
-# def print_message
-#   "Created '#{ARGV[1]}' with the key #{key} and date #{date}."
-# end
