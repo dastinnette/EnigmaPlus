@@ -68,10 +68,10 @@ class Encrypt
   end
 end
 
-if __FILE__ == $0
-  # RUNNER
 
-  file_io = FileIO.new
+if __FILE__ == $0
+
+    file_io = FileIO.new
     message = file_io.message
     encryptor = Encrypt.new('12345', 280715)
     encryptor.get_rotations
