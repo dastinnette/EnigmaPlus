@@ -64,9 +64,15 @@ class Encrypt
 end
 
 if __FILE__ == $0
+  # RUNNER
+  # puts encryptor.print_message
   file_io = FileIO.new
-  message = file_io.message
-  encryptor = Encrypt.new
-  encryptor.get_rotations
-  file_io.output(encryptor.encrypt(message))
+    message = file_io.message
+    encryptor = Encrypt.new
+    encryptor.get_rotations
+    file_io.output(encryptor.encrypt(message))
 end
+#
+# def print_message
+#   "Created '#{ARGV[1]}' with the key #{key} and date #{date}."
+# end
