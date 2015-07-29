@@ -1,22 +1,18 @@
 require 'pry'
 
 class FileIO
-  attr_reader :input, :output
 
-  def initialize (input = ARGV[0], output = ARGV[1])
-    @input = input
-    @output = output
+  def message(filename = ARGV[0])
+    File.open(filename, "r").read
   end
 
-  def read_input
-    filename = File.open(input, "r")
-    filename.read
-  end
-
-  def write_output(results)
-    file = File.open(output, "w")
+  def output(results, filename = ARGV[1])
+    file = File.open(filename, "w")
     file.write(results)
     file.close
   end
 
+  def print_message(key, date)
+    "Created '#{ARGV[1]}' with the key #{key} and date #{date}"
+  end
 end
