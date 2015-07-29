@@ -12,7 +12,4 @@ class FileIO
     file.close
   end
 
-  def print_message(key, date)
-    "Created '#{ARGV[1]}' with the key #{key} and date #{date}"
-  end
 end

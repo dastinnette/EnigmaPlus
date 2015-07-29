@@ -79,8 +79,10 @@ class OffsetCalculator
   end
 
   def rotations
-    rotations = [a_rotation, b_rotation, c_rotation, d_rotation]
+    [a_rotation, b_rotation, c_rotation, d_rotation]
   end
+
+
 
 end
 
