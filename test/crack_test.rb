@@ -85,7 +85,7 @@ class CrackTest < Minitest::Test
     message = file_io.message("crack_test.txt")
     c  = Crack.new
     file_io.output(c.crack(message), "crack_test_results.txt")
-    assert_equal "Created '' with the cracked key 12345 and date 280715.", c.print_message
+    assert_equal "Created '' with the rotations {\"d_rotation\"=>11, \"a_rotation\"=>13, \"b_rotation\"=>25, \"c_rotation\"=>36}.", c.print_message
   end
 
 
