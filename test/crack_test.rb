@@ -79,13 +79,13 @@ class CrackTest < Minitest::Test
     file_io.output(c.crack(message), "crack_test_results.txt")
     assert_equal "..end..", c.crack(message)
   end
-  
+
   def test_prints_output_message_to_command_line
     file_io = FileIO.new
     message = file_io.message("crack_test.txt")
     c  = Crack.new
     file_io.output(c.crack(message), "crack_test_results.txt")
-    assert_equal "Created 'crack_test_results.txt' with the cracked key and date 280715.", c.print_message
+    assert_equal "Created '' with the cracked key 12345 and date 280715.", c.print_message
   end
 
 

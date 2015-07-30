@@ -59,7 +59,7 @@ class Encrypt
   end
 
   def print_message
-    "Created '#{ARGV[1]}' with the key #{key} and date #{date}."
+    "Created '#{ARGV[1]}' with the key #{calc.key} and date #{calc.date}."
   end
 end
 
@@ -68,7 +68,8 @@ if __FILE__ == $0
 
     file_io = FileIO.new
     message = file_io.message
-    encryptor = Encrypt.new('12345', 280715)
+    encryptor = Encrypt.new
+    # ('12345', 280715)
     encryptor.get_rotations
     file_io.output(encryptor.encrypt(message))
     puts encryptor.print_message

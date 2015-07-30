@@ -57,6 +57,6 @@ class DecryptTest < Minitest::Test
     decryptor.get_rotations
     file_io.output(decryptor.decrypt(message), "decrypt_test_results.txt")
     decryptor.print_message
-    assert_equal "Created 'decrypt_test_results.txt' with the key 12345 and date 280715.", decryptor.print_message
+    assert_equal "Created '' with the key 12345 and date 280715.", decryptor.print_message
   end
 end

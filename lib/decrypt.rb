@@ -6,7 +6,7 @@ class Decrypt
 
   attr_reader   :rotations, :file_io, :key, :date, :calc, :characters
 
-  def initialize(key = nil, date = nil)
+  def initialize(key = ARGV[2], date = ARGV[3])
     @date       = date
     @key        = key
     @file_io    = FileIO.new
@@ -61,7 +61,7 @@ class Decrypt
   end
 
   def print_message
-    "Created '#{ARGV[1]}' with the key #{key} and date #{date}."
+    "Created '#{ARGV[1]}' with the key #{calc.key} and date #{calc.date}."
   end
 
 end
@@ -70,7 +70,8 @@ if __FILE__ == $0
 
   file_io = FileIO.new
     message = file_io.message
-    decryptor = Decrypt.new('12345', 280715)
+    decryptor = Decrypt.new
+    # ('12345', 280715)
     decryptor.get_rotations
     file_io.output(decryptor.decrypt(message))
     puts decryptor.print_message
