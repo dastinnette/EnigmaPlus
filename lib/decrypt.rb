@@ -1,25 +1,23 @@
 require_relative 'offset_calculator'
 require_relative 'file_io'
+require_relative 'character_map'
 
 class Decrypt
 
-  attr_reader   :rotations, :file_io, :key, :date, :calc
+  attr_reader   :rotations, :file_io, :key, :date, :calc, :characters
 
   def initialize(key = nil, date = nil)
-    @date    = date
-    @key     = key
-    @file_io = FileIO.new
-    @calc    = OffsetCalculator.new(key, date)
+    @date       = date
+    @key        = key
+    @file_io    = FileIO.new
+    @calc       = OffsetCalculator.new(key, date)
+    @characters = CharacterMap.new.characters
   end
 
   def get_rotations
     @rotations = calc.rotations.map do |rotation|
       rotation.-@
     end
-  end
-
-  def characters
-    characters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", " ", ".", "," ]
   end
 
   def decrypt_letter_a(letter)
@@ -69,7 +67,6 @@ class Decrypt
 end
 
 if __FILE__ == $0
-  # RUNNER
 
   file_io = FileIO.new
     message = file_io.message

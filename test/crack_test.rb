@@ -22,37 +22,71 @@ class CrackTest < Minitest::Test
     file_io = FileIO.new
     message = file_io.message("crack_test.txt")
     crack   = Crack.new
-    assert_equal [36, 11, 13, 25], crack.final_index
+    assert_equal Hash["d_rotation"=>11, "a_rotation"=>13, "b_rotation"=>25, "c_rotation"=>36], crack.final_index
   end
 
-  def test_crack_finds_distance_from_known_character_to_encrypted
+  def test_crack_finds_distance_from_first_known_character_to_encrypted
     file_io = FileIO.new
     message = file_io.message("crack_test.txt")
     crack   = Crack.new
     crack.rotation_one
     known_char = "n"
     char_index = -4
-    assert_equal "11", crack.find_rotation(known_char, char_index)
+    assert_equal 11, crack.find_rotation(known_char, char_index)
   end
 
-  def test_crack_finds_distance_from_known_character_to_encrypted
+  def test_crack_finds_distance_from_second_known_character_to_encrypted
     file_io = FileIO.new
     message = file_io.message("crack_test.txt")
     crack   = Crack.new
     crack.rotation_one
-    known_char = "n"
-    char_index = -4
-    assert_equal "11", crack.find_rotation(known_char, char_index)
+    known_char = "d"
+    char_index = -3
+    assert_equal 13, crack.find_rotation(known_char, char_index)
   end
 
-  # def test_rotation_one_works
-  #   file_io = FileIO.new
-  #   message = file_io.message("crack_test.txt")
-  #   crack   = Crack.new
-  #   known_char = "."
-  #   char_index =
-  #   assert_equal " ", crack.find_rotation(known_char, char_index)
-  # end
+  def test_crack_finds_distance_from_third_known_character_to_encrypted
+    file_io = FileIO.new
+    message = file_io.message("crack_test.txt")
+    crack   = Crack.new
+    crack.rotation_one
+    known_char = "."
+    char_index = -2
+    assert_equal 25, crack.find_rotation(known_char, char_index)
+  end
+
+  def test_crack_finds_distance_from_fourth_known_character_to_encrypted
+    file_io = FileIO.new
+    message = file_io.message("crack_test.txt")
+    crack   = Crack.new
+    crack.rotation_one
+    known_char = "."
+    char_index = -1
+    assert_equal 36, crack.find_rotation(known_char, char_index)
+  end
+
+  def test_final_index_returns_proper_hash_based_on_text_input
+    file_io = FileIO.new
+    message = file_io.message("crack_test.txt")
+    crack   = Crack.new
+    assert_equal Hash["d_rotation"=>11, "a_rotation"=>13, "b_rotation"=>25, "c_rotation"=>36], crack.final_index
+  end
+
+  def test_cracks_file
+    file_io = FileIO.new
+    message = file_io.message("crack_test.txt")
+    c  = Crack.new
+    file_io.output(c.crack(message), "crack_test_results.txt")
+    assert_equal "..end..", c.crack(message)
+  end
+  
+  def test_prints_output_message_to_command_line
+    file_io = FileIO.new
+    message = file_io.message("crack_test.txt")
+    c  = Crack.new
+    file_io.output(c.crack(message), "crack_test_results.txt")
+    assert_equal "Created 'crack_test_results.txt' with the cracked key and date 280715.", c.print_message
+  end
 
 
 end

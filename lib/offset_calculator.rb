@@ -28,7 +28,6 @@ class OffsetCalculator
     OffsetGenerator.new.generate_offset(date)
   end
 
-
   def rot_a
     key[0..1]
   end
@@ -80,26 +79,4 @@ class OffsetCalculator
   def rotations
     [a_rotation, b_rotation, c_rotation, d_rotation]
   end
-
-
-
-end
-
-
-if __FILE__ == $0
-  calc = OffsetCalculator.new
-  calc.get_key
-  calc.get_offset
-  p calc.rot_a
-  p calc.rot_b
-  p calc.rot_c
-  p calc.rot_d
-  p calc.off_a
-  p calc.off_b
-  p calc.off_c
-  p calc.off_d
-  p calc.a_rotation
-  p calc.b_rotation
-  p calc.c_rotation
-  p calc.d_rotation
 end

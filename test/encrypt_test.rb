@@ -4,12 +4,6 @@ require './lib/encrypt'
 
 class EncryptTest < Minitest::Test
 
-  def test_character_map_is_39_characters
-    character_map = Encrypt.new.characters
-    assert character_map
-    assert_equal 39, character_map.count
-  end
-
   def test_input_encrypts_a_properly_based_on_rotation
     shift = Encrypt.new("12345", "280715")
     shift.get_rotations

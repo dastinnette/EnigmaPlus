@@ -1,21 +1,3 @@
-# read in encrypted msg(fileio ARGV[0])
-# reverse encrypted message
-# pull 1st 4 chars out of reverse encrypted message
-# get indexes relative to character map of above characters
-# "end..".reverse
-# "..dn" get indexes relative to character map of unencrypted message
-# subtract indexes to get (key + offset)
-# reverse message
-# use modulo to figure out where key actually begins (ie find 1st 4 #s of key offset)
-# reverse it
-# subtract offsets
-
-# Find length of string, %4, remainder = A B C D shift
-# Find distance on character map for each A B C D
-# Difference equals rotation for each A B C D
-# Rotation - 1 2 2 5 = key
-# Run result through decrypt function
-
 require 'pry'
 require_relative 'file_io'
 require_relative 'character_map'
@@ -38,19 +20,6 @@ class Crack
   def find_modulo
     format_message.length%4
   end
-
-  # def find_rotation(known_character)
-  #   # look in the message file, grab last character = variable
-  #     crack_last = format_message[-1]
-  #   # find last character in character map and its index = variable
-  #     crack_last_index = characters.index(crack_last)
-  #   # find known character in the character map in the index = variable
-  #     known_last_index = characters.index(known_character)
-  #   # subtract known character index from encrypted character index = variable
-  #     rotation = known_last_index - crack_last_index
-  #   # repeat for all 4 characters
-  #
-  # end
 
   def find_rotation(known_char, char_index)
    char_to_crack = format_message[char_index]
@@ -91,7 +60,7 @@ class Crack
       Hash["d_rotation", rotation_one, "a_rotation", rotation_two, "b_rotation", rotation_three, "c_rotation", rotation_four]
     end
   end
-# because a is always assigned to rotation one, etc.
+
   def crack_letter_a(letter)
     input = final_index.fetch("a_rotation")
     a_rotated_characters = characters.rotate(-input)
@@ -136,9 +105,18 @@ class Crack
     cracked_input
   end
 
+  def print_message
+    "Created '#{ARGV[1]}' with the cracked key and date ."
+  end
+
 end
+
+if __FILE__ == $0
+
 file_io = FileIO.new
 message = file_io.message
 c  = Crack.new
-# c.format_message
 file_io.output(c.crack(message))
+puts c.print_message
+
+end
