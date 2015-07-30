@@ -106,7 +106,7 @@ class Crack
   end
 
   def print_message
-    "Created '#{ARGV[1]}' with the cracked key 12345 and date 280715."
+    "Created '#{ARGV[1]}' with the rotations #{final_index}."
   end
 
 end
