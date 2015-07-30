@@ -21,11 +21,6 @@ class OffsetGeneratorTest < Minitest::Test
     assert_equal 6, Time.now.strftime("%d%m%y").length
   end
 
-  def test_date_formats_correctly
-    skip
-    # check for edge cases with punctuation and too many numbers given
-  end
-
   def test_offset_is_a_four_digit_number
     offset = OffsetGenerator.new
     assert_equal 4, offset.generate_offset(280715).length
