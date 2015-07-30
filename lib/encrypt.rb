@@ -12,6 +12,7 @@ class Encrypt
     @file_io = FileIO.new
     @calc    = OffsetCalculator.new(key, date)
     @characters = CharacterMap.new.characters
+    get_rotations
   end
 
   def get_rotations

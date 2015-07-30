@@ -5,7 +5,7 @@ class CharacterMap
   end
 
   def character_hash
-    Hash[characters.zip(1..39)]
+    Hash[characters.zip(1..characters.length)]
   end
 
 end

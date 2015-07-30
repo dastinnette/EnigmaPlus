@@ -6,11 +6,13 @@ class OffsetCalculator
   attr_reader :key, :offset, :date
 
   def initialize(key = nil, date = nil)
-    if key.nil?
-      @key = get_key
-    else
-      @key = key
-    end
+    @key = key || get_key
+
+    # if key.nil?
+    #   @key = get_key
+    # else
+    #   @key = key
+    # end
 
     if date.nil?
       @date = Time.now.strftime("%d%m%y")

@@ -25,11 +25,11 @@ class Crack
    char_to_crack = format_message[char_index]
    char_to_crack_index = character_hash[char_to_crack]
    known_char_index = character_hash[known_char]
-     if char_to_crack_index < known_char_index
-       rotation = character_hash.length + (char_to_crack_index - known_char_index)
-     elsif char_to_crack_index > known_char_index
-       rotation = (char_to_crack_index - known_char_index)
-     end
+   if char_to_crack_index < known_char_index
+     rotation = character_hash.length + (char_to_crack_index - known_char_index)
+   elsif char_to_crack_index > known_char_index
+     rotation = (char_to_crack_index - known_char_index)
+   end
   end
 
   def rotation_one

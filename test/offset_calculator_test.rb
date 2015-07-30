@@ -26,6 +26,7 @@ class OffsetCalculatorTest < Minitest::Test
 
   def test_offset_a_returns_negative_fourth_digit_of_date_function
     offset = OffsetCalculator.new("12345", "280715")
+
     assert_equal "1", offset.off_a
   end
 
@@ -46,22 +47,22 @@ class OffsetCalculatorTest < Minitest::Test
 
   def test_a_rotation_is_sum_of_rotation_a_and_offset_a
     rotation = OffsetCalculator.new("12345", "280715")
-    assert_equal rotation.rot_a.to_i + rotation.off_a.to_i, rotation.a_rotation
+    assert_equal 12+1, rotation.a_rotation
   end
 
   def test_b_rotation_is_sum_of_rotation_b_and_offset_b
     rotation = OffsetCalculator.new("12345", "280715")
-    assert_equal rotation.rot_b.to_i + rotation.off_b.to_i, rotation.b_rotation
+    assert_equal 23+2, rotation.b_rotation
   end
 
   def test_c_rotation_is_sum_of_rotation_c_and_offset_c
     rotation = OffsetCalculator.new("12345", "280715")
-    assert_equal rotation.rot_c.to_i + rotation.off_c.to_i, rotation.c_rotation
+    assert_equal 34+2, rotation.c_rotation
   end
 
   def test_d_rotation_is_sum_of_rotation_d_and_offset_d
     rotation = OffsetCalculator.new("12345", "280715")
-    assert_equal rotation.rot_d.to_i + rotation.off_d.to_i, rotation.d_rotation
+    assert_equal 45+5, rotation.d_rotation
   end
 
 end

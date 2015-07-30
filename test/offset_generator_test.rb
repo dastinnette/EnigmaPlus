@@ -8,12 +8,17 @@ class OffsetGeneratorTest < Minitest::Test
     key = OffsetGenerator.new
     assert_equal 5, key.generate_key.length
     assert key.generate_key.class == String
+    assert_kind_of String, key.generate_key
   end
 
   def test_key_is_random_number
     key1 = OffsetGenerator.new.generate_key
     key2 = OffsetGenerator.new.generate_key
     refute key1 == key2
+
+    keys = []
+    5.times{ keys << OffsetGenerator.new.generate_key }
+    assert keys.uniq.length > 1
   end
 
   def test_date_is_a_six_digit_number
